@@ -20,13 +20,6 @@ namespace ChakaServers
             var result = svrLogic.UpdateServer(serverArray);
 
             Console.WriteLine($"The number of days to update all servers is {result}");
-
-            #region Console result for ServerLogic2
-            //var cSvrLogic = new ServerLogic2();
-            //var result2 = cSvrLogic.UpdateServer(serverArray);
-
-            //Console.WriteLine(result2); 
-            #endregion
         }
     }
 }

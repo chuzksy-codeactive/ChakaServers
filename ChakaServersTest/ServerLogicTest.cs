@@ -41,7 +41,7 @@ namespace ChakaServersTest
             var serverArray = new List<List<int>> {
                 new List<int> { 1, 0, 0 },
                 new List<int> { 0, 0, 0 },
-                new List<int> { 0, 0, 1 }
+                new List<int> { 0, 0, 0 }
             };
 
             //Act

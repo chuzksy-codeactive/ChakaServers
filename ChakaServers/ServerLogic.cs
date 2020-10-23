@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ChakaServers
 {
-    #region ServerLogic I
+    #region ServerLogic
     public class ServerLogic : IServerLogic
     {
         private void AddUpdatedStateToQueue(List<List<int>> grid, Queue<Server> server, int i, int j, int dayUpdated)
@@ -88,91 +89,5 @@ namespace ChakaServers
             return noOfDays;
         }
     }
-    #endregion
-
-    #region ServerLogic II
-    public class ServerLogic2
-    {
-        private void AddUpdatedStateToQueue(List<List<int>> grid, Queue<CServer> server, CServer cServer)
-        {
-            // This is the updated state in the mesh
-            grid[cServer.I][cServer.J] = 1;
-
-            // Adding the updatedState to the server
-            //CServer cs = new CServer();
-            //cs.I = cServer.I;
-            //cs.J = cServer.J;
-            //cs.TurnUpdated = cs.TurnUpdated;
-
-            server.Enqueue(cServer);
-        }
-
-        private void UpdateAdjacentServer(List<List<int>> grid, Queue<CServer> server, CServer cs)
-        {
-            // Tranverse the adjacent cells of an updated state (1) Up, Down, Left, Right
-            // If there's a non updated state (0), convert it to an updated state
-
-
-            // Up
-            if (cs.I - 1 >= 0 && grid[cs.I - 1][cs.J] == 0)
-            {
-                AddUpdatedStateToQueue(grid, server, cs);
-            }
-
-            // Down
-            if (cs.I + 1 < grid.Count && grid[cs.I + 1][cs.J] == 0)
-            {
-                AddUpdatedStateToQueue(grid, server, cs);
-            }
-
-            // Left
-            if (cs.J - 1 >= 0 && grid[cs.I][cs.J - 1] == 0)
-            {
-                AddUpdatedStateToQueue(grid, server, cs);
-            }
-
-            // Right
-            if (cs.J + 1 < grid[cs.I].Count && grid[cs.I][cs.J + 1] == 0)
-            {
-                AddUpdatedStateToQueue(grid, server, cs);
-            }
-        }
-
-        public int UpdateServer(List<List<int>> grid)
-        {
-            int turn = 0;
-
-            // Create a queue that holds the updated states.
-            Queue<CServer> s = new Queue<CServer>();
-
-            // Go throught the server cells to add the initial updated state to the queue.
-            for (int i = 0; i < grid.Count; i++)
-            {
-                for (int j = 0; j < grid[i].Count; j++)
-                {
-                    // If the cell is updated
-                    if (grid[i][j] == 1)
-                    {
-                        AddUpdatedStateToQueue(grid, s, new CServer { I = i, J = j, TurnUpdated = 0 });
-                    }
-                }
-            }
-
-            // Process each updated state in the queue by updated any cell adjacent to it
-            while (s.Count > 0)
-            {
-                CServer svr = s.Peek();
-                s.Dequeue();
-
-                // Update the turn 
-                turn = svr.TurnUpdated;
-
-                // Update the state of the adjacent cell
-                UpdateAdjacentServer(grid, s, svr);
-            }
-
-            return turn;
-        }
-    } 
     #endregion
 }
