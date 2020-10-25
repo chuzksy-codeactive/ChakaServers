@@ -1,6 +1,6 @@
 ﻿namespace ChakaServers
 {
-    public class Server
+    struct Server
     {
         public int i;
         public int j;

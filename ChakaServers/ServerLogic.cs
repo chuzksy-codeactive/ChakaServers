@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ChakaServers
 {
@@ -22,7 +21,7 @@ namespace ChakaServers
             server.Enqueue(s);
         }
 
-        private void UpdateAdjacentServer(List<List<int>> grid, Queue<Server> server, ref int i, ref int j, int dayUpdated)
+        private void UpdateAdjacentServer(List<List<int>> grid, Queue<Server> server, int i, int j, int dayUpdated)
         {
             // Tranverse the adjacent cells of an updated state (1) Up, Down, Left, Right
             // If there's a non updated state (0), convert it to an updated state
@@ -83,7 +82,7 @@ namespace ChakaServers
                 noOfDays = svr.dayUpdated;
 
                 // Update the state of the adjacent cell
-                UpdateAdjacentServer(grid, s, ref svr.i, ref svr.j, svr.dayUpdated + 1);
+                UpdateAdjacentServer(grid, s, svr.i, svr.j, svr.dayUpdated + 1);
             }
 
             return noOfDays;
